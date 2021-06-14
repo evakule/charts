@@ -7,23 +7,18 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.time.Instant;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Controller {
-  private static final String BALANCES = "C:/Users/enric/Desktop/balances_202106122024.csv";
-  private static final String BALANCES_OUTPUT = "C:/Users/egor.vakulenko/Desktop/output.csv";
+public class BalanceProvider {
+  private static final String BALANCES = "/Users/evakule/Downloads/balances_202106141321.csv";
 
-  public static void main(String[] args) {
-    getBalances().forEach(System.out::println);
-  }
 
-  private static List<BalanceEntity> getBalances() {
+  public List<BalanceEntity> getBalances() {
     int counter = 0;
     String row;
     List<BalanceEntity> balances = new ArrayList<>();
@@ -62,9 +57,9 @@ public class Controller {
   }
 
   private static ZonedDateTime getTimeFromString(String timeStr) {
-    return LocalDate.parse(
+    return LocalDateTime.parse(
             timeStr, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-    ).atStartOfDay(ZoneId.systemDefault());
+    ).atZone(ZoneId.of("GMT"));
   }
 
 }
